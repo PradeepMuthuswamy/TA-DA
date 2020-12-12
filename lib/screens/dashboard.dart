@@ -7,6 +7,28 @@ class Dashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
+      bottomNavigationBar: BottomNavigationBar(items: [
+        BottomNavigationBarItem(
+            icon: Icon(
+              Icons.share,
+              color: Colors.indigo,
+            ),
+            label: 'Share App'),
+        BottomNavigationBarItem(
+          icon: Icon(
+            Icons.comment,
+            color: Colors.redAccent,
+          ),
+          label: 'Feedback',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(
+            Icons.error_outline,
+            color: Colors.orangeAccent,
+          ),
+          label: 'Disclaimer',
+        ),
+      ]),
       body: SafeArea(
         child: Container(
           decoration: BoxDecoration(
@@ -20,29 +42,21 @@ class Dashboard extends StatelessWidget {
               Container(
                 child: Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Text(
-                            'Handbook',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 28,
-                                fontWeight: FontWeight.w300),
-                          ),
-                        ),
-                        IconButton(
-                            icon: Icon(
-                              Icons.share,
-                              color: Colors.white,
-                            ),
-                            onPressed: null)
-                      ],
+                    Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Text(
+                        'Handbook',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 28,
+                            fontWeight: FontWeight.w300),
+                      ),
                     )
                   ],
                 ),
+              ),
+              SizedBox(
+                height: 20,
               ),
               GridView(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -86,6 +100,9 @@ class Dashboard extends StatelessWidget {
                     ),
                     title: 'TR Rules',
                     subtitle: 'Frequently used rules',
+                    onTap: () {
+                      Navigator.of(context).pushNamed('rules');
+                    },
                   ),
                   DashBoardTile(
                     icon: Icon(
@@ -95,24 +112,9 @@ class Dashboard extends StatelessWidget {
                     ),
                     title: 'Travel',
                     subtitle: 'Emoluments on temporary duty',
-                  ),
-                  DashBoardTile(
-                    icon: Icon(
-                      Icons.error_outline,
-                      size: 40,
-                      color: Colors.yellow[800],
-                    ),
-                    title: 'Disclaimer',
-                    subtitle: 'Read this before use',
-                  ),
-                  DashBoardTile(
-                    icon: Icon(
-                      Icons.comment,
-                      size: 40,
-                      color: Colors.redAccent,
-                    ),
-                    title: 'Feedback',
-                    subtitle: 'Suggestions & improvements',
+                    onTap: () {
+                      Navigator.of(context).pushNamed('travel');
+                    },
                   ),
                 ],
               ),
