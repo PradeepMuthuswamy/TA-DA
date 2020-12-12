@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:tada_info/widgets/dashboard_tile.dart';
+import 'package:tada_info/widgets/posting_calculator.dart';
 
 class Dashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       body: SafeArea(
         child: Container(
           decoration: BoxDecoration(
@@ -51,10 +53,18 @@ class Dashboard extends StatelessWidget {
                 shrinkWrap: true,
                 children: [
                   DashBoardTile(
+                    onTap: () {
+                      showModalBottomSheet(
+                          isScrollControlled: true,
+                          context: context,
+                          builder: (context) {
+                            return PostingCalculator();
+                          });
+                    },
                     icon: Icon(
                       Icons.transfer_within_a_station,
                       size: 40,
-                      color: Colors.green[800],
+                      color: Colors.green,
                     ),
                     title: 'Posting',
                     subtitle: 'Emoluments on posting',
@@ -63,7 +73,7 @@ class Dashboard extends StatelessWidget {
                     icon: Icon(
                       Icons.flight_takeoff,
                       size: 40,
-                      color: Colors.indigo,
+                      color: Colors.pink,
                     ),
                     title: 'LTC',
                     subtitle: 'Rules in brief',
@@ -72,7 +82,7 @@ class Dashboard extends StatelessWidget {
                     icon: Icon(
                       Icons.rule,
                       size: 40,
-                      color: Colors.deepOrange,
+                      color: Colors.purpleAccent,
                     ),
                     title: 'TR Rules',
                     subtitle: 'Frequently used rules',
@@ -81,7 +91,7 @@ class Dashboard extends StatelessWidget {
                     icon: Icon(
                       Icons.train,
                       size: 40,
-                      color: Colors.teal,
+                      color: Colors.cyan,
                     ),
                     title: 'Travel',
                     subtitle: 'Emoluments on temporary duty',
@@ -90,7 +100,7 @@ class Dashboard extends StatelessWidget {
                     icon: Icon(
                       Icons.error_outline,
                       size: 40,
-                      color: Colors.red,
+                      color: Colors.yellow[800],
                     ),
                     title: 'Disclaimer',
                     subtitle: 'Read this before use',
@@ -99,7 +109,7 @@ class Dashboard extends StatelessWidget {
                     icon: Icon(
                       Icons.comment,
                       size: 40,
-                      color: Colors.purple,
+                      color: Colors.redAccent,
                     ),
                     title: 'Feedback',
                     subtitle: 'Suggestions & improvements',
