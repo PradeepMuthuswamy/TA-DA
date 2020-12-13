@@ -7,28 +7,48 @@ class Dashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
-      bottomNavigationBar: BottomNavigationBar(items: [
-        BottomNavigationBarItem(
-            icon: Icon(
-              Icons.share,
-              color: Colors.indigo,
-            ),
-            label: 'Share App'),
-        BottomNavigationBarItem(
-          icon: Icon(
-            Icons.comment,
-            color: Colors.redAccent,
+      bottomNavigationBar: BottomAppBar(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: [
+              FlatButton.icon(
+                label: Text(
+                  'Share App',
+                  style: TextStyle(fontWeight: FontWeight.w300),
+                ),
+                icon: Icon(
+                  Icons.share,
+                  color: Colors.indigo,
+                ),
+                onPressed: () {},
+              ),
+              FlatButton.icon(
+                label: Text(
+                  'Feedback',
+                  style: TextStyle(fontWeight: FontWeight.w300),
+                ),
+                icon: Icon(
+                  Icons.comment,
+                  color: Colors.redAccent,
+                ),
+                onPressed: () {},
+              ),
+              FlatButton.icon(
+                label: Text(
+                  'Disclaimer',
+                  style: TextStyle(fontWeight: FontWeight.w300),
+                ),
+                icon: Icon(
+                  Icons.error,
+                  color: Colors.deepOrange,
+                ),
+                onPressed: () {},
+              ),
+            ],
           ),
-          label: 'Feedback',
         ),
-        BottomNavigationBarItem(
-          icon: Icon(
-            Icons.error_outline,
-            color: Colors.orangeAccent,
-          ),
-          label: 'Disclaimer',
-        ),
-      ]),
+      ),
       body: SafeArea(
         child: Container(
           decoration: BoxDecoration(
@@ -91,6 +111,9 @@ class Dashboard extends StatelessWidget {
                     ),
                     title: 'LTC',
                     subtitle: 'Rules in brief',
+                    onTap: () {
+                      Navigator.of(context).pushNamed('ltc');
+                    },
                   ),
                   DashBoardTile(
                     icon: Icon(
