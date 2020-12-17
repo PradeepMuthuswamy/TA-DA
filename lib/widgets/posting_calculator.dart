@@ -112,33 +112,74 @@ class _PostingCalculatorState extends State<PostingCalculator> {
                     ),
                   )
                 : SizedBox(),
-            FlatButton(
-              child: Text('Calculate'),
-              onPressed: () {
-                showDialog(
-                    context: context,
-                    builder: (_) {
-                      return AlertDialog(
-                        title: Text('Calculated Emoluments'),
-                        content: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(_distance.text.toString()),
-                            Text(_basicPay.text.toString()),
-                          ],
-                        ),
-                        actions: [
-                          TextButton(
-                            child: Text('Ok'),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                        ],
-                      );
-                    });
-              },
-            )
+            (_basicPay.value.text.isNotEmpty && _distance.value.text.isNotEmpty)
+                ? FlatButton(
+                    child: Text('Calculate'),
+                    onPressed: () {
+                      int ctg =
+                          (int.tryParse(_basicPay.value.text) * 0.8).toInt();
+                      int tpt =
+                          (int.tryParse(_distance.value.text) * 50).toInt();
+                      showDialog(
+                          context: context,
+                          builder: (_) {
+                            return AlertDialog(
+                              title: Text('Calculated Emoluments'),
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text('Contingency Grant:'),
+                                      Text('\u20B9 ' + ctg.toString()),
+                                    ],
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text('Personal Effects:'),
+                                      Text('\u20B9 ' + tpt.toString()),
+                                    ],
+                                  ),
+                                  (checked && _weight.value.text.isNotEmpty)
+                                      ? Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text('Vehicle:'),
+                                            Text('\u20B9 ' + _weight.text),
+                                          ],
+                                        )
+                                      : SizedBox(),
+                                  Divider(),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text('Total:'),
+                                      Text('\u20B9 ' + (tpt + ctg).toString())
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              actions: [
+                                TextButton(
+                                  child: Text('Ok'),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              ],
+                            );
+                          });
+                    },
+                  )
+                : SizedBox(),
           ],
         ),
       ),
