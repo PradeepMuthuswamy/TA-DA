@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_share/flutter_share.dart';
 import 'package:tada_info/widgets/dashboard_tile.dart';
 import 'package:tada_info/widgets/posting_calculator.dart';
 
 class Dashboard extends StatelessWidget {
+
+  Future<void> share() async {
+    await FlutterShare.share(
+        title: 'Handbook app',
+        text: 'Hey! Checkout this awesome app! Cheers',
+        linkUrl: 'https://play.google.com/store/apps/details?id=com.onepercentrule.tada',
+        chooserTitle: 'Share Handbook App with friends');
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +30,7 @@ class Dashboard extends StatelessWidget {
                   Icons.share,
                   color: Colors.indigo,
                 ),
-                onPressed: () {},
+                onPressed: share,
               ),
               FlatButton.icon(
                 label: Text(
