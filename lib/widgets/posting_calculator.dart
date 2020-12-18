@@ -6,8 +6,6 @@ class PostingCalculator extends StatefulWidget {
 }
 
 class _PostingCalculatorState extends State<PostingCalculator> {
-
-
   TextEditingController _basicPay = TextEditingController();
   TextEditingController _distance = TextEditingController();
   TextEditingController _weight = TextEditingController();
@@ -21,6 +19,7 @@ class _PostingCalculatorState extends State<PostingCalculator> {
   bool basicPayError = false;
   bool distanceError = false;
   bool weightError = false;
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -78,17 +77,17 @@ class _PostingCalculatorState extends State<PostingCalculator> {
               child: TextField(
                 controller: _basicPay,
                 keyboardType: TextInputType.number,
-                onChanged: (value){
-
-                  if(int.parse(value) < 56100 )
+                onChanged: (value) {
+                  if (int.parse(value) < 56100)
                     setState(() {
                       basicPayError = true;
-                      basicPayErrorText = 'Basic pay cannot be less than Rs.56100';
+                      basicPayErrorText =
+                          'Basic pay cannot be less than Rs.56100';
                     });
                   else
                     setState(() {
                       basicPayError = false;
-                      basicPayErrorText = null ;
+                      basicPayErrorText = null;
                     });
                 },
                 decoration: InputDecoration(
@@ -101,9 +100,8 @@ class _PostingCalculatorState extends State<PostingCalculator> {
               child: TextField(
                 controller: _distance,
                 keyboardType: TextInputType.number,
-                onChanged: (value){
-
-                  if(int.parse(value) <1 )
+                onChanged: (value) {
+                  if (int.parse(value) < 1)
                     setState(() {
                       distanceError = true;
                       distanceErrorText = 'Distance cannot be less than 1 km';
@@ -125,7 +123,6 @@ class _PostingCalculatorState extends State<PostingCalculator> {
               onChanged: (change) {
                 setState(() {
                   checked = change;
-
                 });
               },
             ),
@@ -136,17 +133,17 @@ class _PostingCalculatorState extends State<PostingCalculator> {
                       controller: _weight,
                       keyboardType: TextInputType.number,
                       maxLength: 4,
-                      onChanged: (value){
-                        if(int.parse(value) <50 )
+                      onChanged: (value) {
+                        if (int.parse(value) < 50)
                           setState(() {
                             weightError = true;
                             weightErrorText = 'Weight cannot be less than 50';
                           });
                         else
-                        setState(() {
-                        weightError = false;
-                        weightErrorText = null;
-                        });
+                          setState(() {
+                            weightError = false;
+                            weightErrorText = null;
+                          });
                       },
                       decoration: InputDecoration(
                           labelText: 'Enter weight of vehicle (kg)',
@@ -154,26 +151,27 @@ class _PostingCalculatorState extends State<PostingCalculator> {
                     ),
                   )
                 : SizedBox(),
-            (!basicPayError && !distanceError)
+            (_basicPay.value.text.isNotEmpty && _distance.value.text.isNotEmpty)
                 ? FlatButton(
-                    child: Text('Calculate'),
+                    color: Colors.blue,
+                    shape: StadiumBorder(),
+                    child: Text('Calculate',style: TextStyle(color: Colors.white,fontWeight: FontWeight.w300),),
                     onPressed: () {
-
-                      if(checked && _weight.value.text.isEmpty)
+                      if (checked && _weight.value.text.isEmpty)
                         setState(() {
                           weightError = true;
                           weightErrorText = 'Do not leave this field blank';
                         });
-
-                        else{
-
-                        int wt = checked? int.tryParse(_weight.value.text) : 0;
+                      else {
+                        int wt = checked ? int.tryParse(_weight.value.text) : 0;
                         int ctg =
-                        (int.tryParse(_basicPay.value.text) * 0.8).toInt();
+                            (int.tryParse(_basicPay.value.text) * 0.8).toInt();
                         int tpt =
-                        (int.tryParse(_distance.value.text) * 50).toInt();
+                            (int.tryParse(_distance.value.text) * 50).toInt();
 
-                        int veh = (wt* 50 * int.tryParse(_distance.value.text)) ~/ 6000;
+                        int veh =
+                            (wt * 50 * int.tryParse(_distance.value.text)) ~/
+                                6000;
                         showDialog(
                             context: context,
                             builder: (_) {
@@ -182,7 +180,7 @@ class _PostingCalculatorState extends State<PostingCalculator> {
                                 content: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceEvenly,
+                                      MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Row(
                                       children: [
@@ -190,11 +188,11 @@ class _PostingCalculatorState extends State<PostingCalculator> {
                                         Text('\u20B9 ' + ctg.toString()),
                                       ],
                                       mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                          MainAxisAlignment.spaceBetween,
                                     ),
                                     Row(
                                       mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text('Personal Effects:'),
                                         Text('\u20B9 ' + tpt.toString()),
@@ -202,21 +200,22 @@ class _PostingCalculatorState extends State<PostingCalculator> {
                                     ),
                                     (checked && _weight.value.text.isNotEmpty)
                                         ? Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text('Vehicle:'),
-                                        Text('\u20B9 ' + veh.toString()),
-                                      ],
-                                    )
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text('Vehicle:'),
+                                              Text('\u20B9 ' + veh.toString()),
+                                            ],
+                                          )
                                         : SizedBox(),
                                     Divider(),
                                     Row(
                                       mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text('Total:'),
-                                        Text('\u20B9 ' + (tpt + ctg+ veh).toString())
+                                        Text('\u20B9 ' +
+                                            (tpt + ctg + veh).toString())
                                       ],
                                     ),
                                   ],
@@ -232,9 +231,7 @@ class _PostingCalculatorState extends State<PostingCalculator> {
                               );
                             });
                       }
-                      }
-
-                  )
+                    })
                 : SizedBox(),
           ],
         ),

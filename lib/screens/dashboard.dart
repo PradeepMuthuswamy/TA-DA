@@ -41,7 +41,7 @@ class Dashboard extends StatelessWidget {
                   Icons.comment,
                   color: Colors.redAccent,
                 ),
-                onPressed: () {},
+                onPressed: () =>Navigator.of(context).pushNamed('feedback'),
               ),
               FlatButton.icon(
                 label: Text(
