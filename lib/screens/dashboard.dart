@@ -15,27 +15,25 @@ class Dashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomInset: true,
+      floatingActionButton: FloatingActionButton.extended(onPressed: share, label: Text('Share'),
+      icon: Icon(Icons.share,
+        color: Colors.white,
+      ),
+      ),
       bottomNavigationBar: BottomAppBar(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              FlatButton.icon(
-                label: Text(
-                  'Share App',
-                  style: TextStyle(fontWeight: FontWeight.w300),
-                ),
-                icon: Icon(
-                  Icons.share,
-                  color: Colors.indigo,
-                ),
-                onPressed: share,
-              ),
-              FlatButton.icon(
+
+              TextButton.icon(
                 label: Text(
                   'Feedback',
-                  style: TextStyle(fontWeight: FontWeight.w300),
+                  style: TextStyle(fontWeight: FontWeight.w300,
+                      color: Colors.black
+                  ),
                 ),
                 icon: Icon(
                   Icons.comment,
@@ -43,14 +41,16 @@ class Dashboard extends StatelessWidget {
                 ),
                 onPressed: () =>Navigator.of(context).pushNamed('feedback'),
               ),
-              FlatButton.icon(
+              TextButton.icon(
                 label: Text(
-                  'Disclaimer',
-                  style: TextStyle(fontWeight: FontWeight.w300),
+                  'Generate Claim',
+                  style: TextStyle(fontWeight: FontWeight.w300,
+                  color: Colors.black
+                  ),
                 ),
                 icon: Icon(
-                  Icons.error,
-                  color: Colors.deepOrange,
+                  Icons.note_add,
+                  color: Colors.purple,
                 ),
                 onPressed: () {},
               ),

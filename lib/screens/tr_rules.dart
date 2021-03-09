@@ -10,7 +10,7 @@ class TravelRules extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(
-                  colors: [Colors.blue, Colors.indigo],
+                  colors: [Colors.indigoAccent[200], Colors.indigo[400]],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight)),
           child: Column(
@@ -36,7 +36,7 @@ class TravelRules extends StatelessWidget {
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,
-                                fontWeight: FontWeight.w300),
+                                ),
                           ),
                         ),
                       );
